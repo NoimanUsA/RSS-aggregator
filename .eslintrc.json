@@ -7,7 +7,7 @@
     "jest": true
   },
   //Наборы правил
-  "extends": ["airbnb-base", "plugin:jest/recommended"],
+  "extends": ["eslint-config-airbnb-base", "plugin:jest/recommended"],
   //Плагины с набором правил(?)
   "plugins": ["jest", "babel"],
   // Движок парсинга
