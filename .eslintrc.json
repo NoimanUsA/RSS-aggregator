@@ -1,15 +1,23 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "plugins": ["jest"],
-    "extends": [
-        "airbnb-base",
-        "plugin:jest/recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    }
+  //Настройки проекта
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  //Наборы правил
+  "extends": ["airbnb-base", "plugin:jest/recommended"],
+  //Плагины с набором правил(?)
+  "plugins": ["jest", "babel"],
+  // Движок парсинга
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "import/extensions": 0,
+    "no-console": 0
+  }
 }
