@@ -7,7 +7,7 @@
     "jest": true
   },
   //Наборы правил
-  "extends": ["plugin:jest/recommended"],
+  "extends": ["airbnb-base","plugin:jest/recommended"],
   //Плагины с набором правил(?)
   "plugins": ["jest", "babel"],
   // Движок парсинга
