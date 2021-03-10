@@ -1,2 +1,9 @@
 lint: 
-	npx eslint .
+	npm run lint
+
+build:
+	npm run build
+
+run:
+	npm run run
+
