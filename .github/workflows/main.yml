@@ -11,7 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: lint
+<<<<<<< HEAD
         run: make lint
 
+=======
+        run: |
+          npm ci
+          make lint
+        
+>>>>>>> effa39c20dae81f3c8ae2634d70d3432306a1957
       - name: build
         run: make build
