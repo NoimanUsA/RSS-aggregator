@@ -8,17 +8,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: lint
-<<<<<<< HEAD
-        run: make lint
+  strategy:
+    matrix:
+      node-version: [10.x, 12.x, 14.x, 15.x]
 
-=======
-        run: |
-          npm ci
-          make lint
-        
->>>>>>> effa39c20dae81f3c8ae2634d70d3432306a1957
-      - name: build
-        run: make build
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: lint
+      run: |
+        npm ci
+        make lint
+
+    - name: build
+      run: make build

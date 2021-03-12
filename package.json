@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "lint": "npx eslint .",
-    "build": "npx webpack production",
+    "build": "npx webpack",
     "run": "npx webpack serve --watch-content-base"
   },
   "repository": {
