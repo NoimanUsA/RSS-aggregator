@@ -7,9 +7,15 @@
     "jest": true
   },
   //Наборы правил
-  "extends": ["airbnb-base","plugin:jest/recommended"],
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/recommended"
+  ],
   //Плагины с набором правил(?)
-  "plugins": ["jest", "babel"],
+  "plugins": [
+    "jest",
+    "babel"
+  ],
   // Движок парсинга
   "parser": "babel-eslint",
   "parserOptions": {
@@ -18,6 +24,22 @@
   },
   "rules": {
     "import/extensions": 0,
-    "no-console": 0
+    "no-console": 0,
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "newline-per-chained-call": [
+      "error",
+      {
+        "ignoreChainWithDepth": 2
+      }
+    ]
   }
 }

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const babelRules = {
   test: /\.m?js$/,
@@ -30,11 +31,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/html/index.html'),
     }),
+    new NodePolyfillPlugin(),
   ],
 
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     host: 'localhost',
+    liveReload: true,
     open: true,
     writeToDisk: true,
   },

@@ -9,3 +9,5 @@ build:
 run:
 	npm run run
 
+test:
+	npx jest test
