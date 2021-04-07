@@ -12,10 +12,6 @@ exports.view = (state) => {
       const formButton = document.querySelector('#rss-form #form-btn');
       formButton.disabled = true;
     }
-
-    if (value === 'rendered') {
-      state[renderType].state = 'waiting';
-    }
   });
   return watcher;
 };
