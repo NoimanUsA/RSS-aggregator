@@ -43,9 +43,5 @@ exports.parseNewFeeds = (url, state) => {
 
       const posts = createPosts(state, newFeedId, items);
       state.posts.postsItems = [...posts, ...postsItems];
-    })
-    .catch((error) => {
-      state.error.description = error;
-      state.error.state = 'render';
     });
 };

@@ -8,6 +8,11 @@ const babelRules = {
   use: 'babel-loader',
 };
 
+const bootstrapRules = {
+  test: /\.css$/,
+  use: ['style-loader', 'css-loader'],
+};
+
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
@@ -19,7 +24,7 @@ module.exports = {
   },
 
   module: {
-    rules: [babelRules],
+    rules: [babelRules, bootstrapRules],
   },
 
   plugins: [

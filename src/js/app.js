@@ -11,10 +11,18 @@ const updatePosts = {
     const { feedsItems } = watcher.feeds;
     const urls = feedsItems.map((item) => item.url);
 
-    parseNewPosts(urls, watcher).then((result) => {
-      watcher.posts.postsItems = result;
-      watcher.posts.state = 'render';
-    });
+    parseNewPosts(urls, watcher)
+      .then((result) => {
+        watcher.posts.postsItems = result;
+        watcher.posts.state = 'render';
+      })
+      .then(() => {
+        watcher.posts.state = 'waiting';
+      })
+      .catch((error) => {
+        watcher.error.description = error;
+        watcher.error.state = 'render';
+      });
 
     // make feeds inactive
     const feedsListItems = document.querySelectorAll('#feeds > ul >  li');
@@ -51,29 +59,35 @@ exports.app = () => {
   const form = document.querySelector('#rss-form');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
-    const url = formData.get('url').trim();
+    const input = form.querySelector('.form-control');
+    const url = input.value;
+    input.value = '';
 
-    validate(url, watcher)
-      .then((valid) => {
-        // block button
-        watcher.form.state = 'loading';
+    validate(url, state).then((valid) => {
+      // block button
+      watcher.form.state = 'loading';
 
-        // parse and render feeds if url was valid
-        if (!valid) {
-          watcher.form.state = 'render';
-          return false;
-        }
+      // parse and render feeds if url was valid
+      if (!valid) {
+        watcher.form.state = 'render';
+        return false;
+      }
 
-        return parseNewFeeds(url, watcher).then(() => {
-          watcher.form.state = 'render';
-          watcher.feeds.state = 'render';
-          watcher.posts.state = 'render';
-        });
+      return parseNewFeeds(url, state);
+    })
+      .then(() => {
+        watcher.form.state = 'render';
+        watcher.feeds.state = 'render';
+        watcher.posts.state = 'render';
+      })
+      .then(() => {
+        watcher.form.state = 'waiting';
+        watcher.feeds.state = 'waiting';
+        watcher.posts.state = 'waiting';
       })
       .then(() => {
         // update post every 5 seconds
-        updatePosts.timer(watcher);
+        updatePosts.timer(watcher, state);
       })
       .catch((error) => {
         watcher.error.description = error;

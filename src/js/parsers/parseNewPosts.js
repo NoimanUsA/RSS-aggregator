@@ -49,13 +49,10 @@ exports.parseNewPosts = (urls, state) => {
 
         const feedNewPosts = updatePosts(accumulator, currentFeedId, items);
         return [...feedNewPosts, ...accumulator];
-      })
-      .catch((error) => {
-        state.error.description = error;
-        state.error.state = 'render';
       }));
 
     return newAcc;
   }, Promise.resolve([...postsItems]));
+
   return newPosts;
 };

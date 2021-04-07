@@ -33,8 +33,7 @@ const isRSS = (url, state) => {
       }
 
       return isExist(url, state);
-    })
-    .catch((error) => error);
+    });
 };
 
 const isURL = (url, state) => {
@@ -45,8 +44,7 @@ const isURL = (url, state) => {
       return false;
     }
     return isRSS(url, state);
-  })
-    .catch((error) => error);
+  });
 };
 
 exports.validate = (url, state) => isURL(url, state);

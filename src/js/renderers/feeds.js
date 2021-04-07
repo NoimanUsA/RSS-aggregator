@@ -62,6 +62,4 @@ exports.renderFeeds = (state, i18n) => {
   // add events
   feedsList.removeEventListener('click', showFeedsItemPosts);
   feedsList.addEventListener('click', showFeedsItemPosts);
-
-  feeds.state = 'waiting';
 };

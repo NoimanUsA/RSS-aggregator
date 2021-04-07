@@ -31,7 +31,7 @@ const createPostsItem = (postsItem, i18n) => {
   postRef.addEventListener('click', (e) => {
     e.currentTarget.classList.remove('fw-bold');
     e.currentTarget.classList.add('fw-normal');
-    postItem.visited = true;
+    postsItem.visited = true;
   });
 
   // change modal on click to  post button
@@ -78,6 +78,4 @@ exports.renderPosts = (state, i18n) => {
     const postsListItem = createPostsItem(postsItem, i18n);
     mainPostsList.append(postsListItem);
   });
-
-  posts.state = 'waiting';
 };
