@@ -4,27 +4,31 @@ const yup = require('yup');
 const schema = yup.string().url();
 
 const isExist = (url, state) => {
-  const { feed } = state;
+  const { feeds } = state;
   const { form } = state;
-  if (feed.feedLinks.has(url)) {
-    form.validationDescription = 'RSS уже добавлен';
+  if (feeds.feedsItems.find((item) => item.url === url)) {
+    form.validationDescription = 'has';
     return false;
   }
 
-  feed.feedLinks.add(url);
-  form.validationDescription = 'RSS добавлен';
+  form.validationDescription = 'added';
   return true;
 };
 
 const isRSS = (url, state) => {
   const { form } = state;
-  return axios.get(`https://api.allorigins.win/raw?url=${url}`)
-    .then((res) => res.data)
+  return axios.get(`https://hexlet-allorigins.herokuapp.com/raw?url=${url}`)
+    .then((res) => {
+      if (res.status >= 300) {
+        return Promise.reject(new Error(`Network error ${res.status}`));
+      }
+      return res.data;
+    })
     .then((xml) => new DOMParser().parseFromString(xml, 'text/xml')
       .querySelector('rss'))
     .then((p) => {
       if (!p) {
-        form.validationDescription = 'Ресурс не содержит валидный RSS';
+        form.validationDescription = 'isntRss';
         return false;
       }
 
@@ -37,7 +41,7 @@ const isURL = (url, state) => {
   const { form } = state;
   return schema.isValid(url).then((valid) => {
     if (!valid) {
-      form.validationDescription = 'Ссылка должна быть валидным URL';
+      form.validationDescription = 'isntUrl';
       return false;
     }
     return isRSS(url, state);
