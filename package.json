@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "3th project",
-  "main": "index.html",
+  "main": "src/js/index.js",
   "scripts": {
     "lint": "npx eslint .",
     "build": "npx webpack",
@@ -41,8 +41,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.0-beta2",
+    "bootstrap": "^5.0.0-beta3",
+    "i18next": "^20.1.0",
     "node-polyfill-webpack-plugin": "^1.0.3",
     "on-change": "^2.2.3",
     "yup": "^0.32.9"

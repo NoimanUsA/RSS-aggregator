@@ -4,17 +4,19 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 const { validate } = require('../src/js/validator');
 
 const urls = [
-  ['This is not a link', false, 'Ссылка должна быть валидным URL'],
-  ['https://ru.hexlet.io/lessons.rss', true, 'RSS добавлен'],
-  ['https://ru.hexlet.io/lessons.rss', false, 'RSS уже добавлен'],
-  ['https://www.google.com', false, 'Ресурс не содержит валидный RSS'],
+  ['lorem-rss.herokuapp.com', false, 'isntUrl'],
+  ['http://lorem-rss.herokuapp.com/feed?unit=second', true, 'added'],
+  ['http://lorem-rss.herokuapp.com/feed', false, 'has'],
+  ['https://lorem-rss.herokuapp.com', false, 'isntRss'],
 ];
 
 const state = {
   form: {
     validationDescription: '',
   },
-  feed: { feedLinks: new Set() },
+  feeds: {
+    feedsItems: [{ url: 'http://lorem-rss.herokuapp.com/feed' }],
+  },
 
 };
 
