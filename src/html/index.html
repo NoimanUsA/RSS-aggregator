@@ -2,47 +2,73 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSS лента</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="-1" />
+  <title>RSS лента</title>
+
 </head>
 
 <body>
-    <div id="alert" class="fixed-top invisible d-flex alert alert-danger" role="alert"> </div>
-    <header class="container-fluid bg-dark p-5">
-        <div class="row">
-            <div class="col-8 mx-auto">
-                <h1 class='text-white display-5'>RSS агрегатор</h1>
-                <form action id="rss-form">
-                    <div class="row">
-                        <div class="col-8 mb-1 pe-0">
-                            <input class="form-control" type="url" autofocus="" required="" name="url" aria-label="url"
-                                placeholder="ссылка RSS">
-                        </div>
-                        <div class="col-auto"><button class="btn btn-primary btn-m" type="submit"
-                                aria-label="add">Add</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="example text-secondary">
-                    Пример : http://lorem-rss.herokuapp.com/feed
-                </div>
-                <div id="rss-description">
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <main class="container-fluid p-5">
-        <div class="row">
-            <div id="feeds" class="col-8 mx-auto">
-            </div>
+  <!-- MODAL -->
+  <div class="modal fade" id='modal' tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-success btn-read-more" target="_blank"></a>
+          <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal"></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="row">
-            <div id="posts" class="col-8 mx-auto">
+  <!-- ALERT -->
+  <div id="alert" class="fixed-top invisible d-flex alert alert-danger" role="alert"> </div>
+
+
+  <header class="container-fluid bg-dark p-5">
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <h1 class='text-white display-5'>RSS агрегатор</h1>
+        <form action id="rss-form">
+          <div class="row">
+            <div class="col-8 mb-1 pe-0">
+              <input class="form-control" type="url" autofocus="" required="" name="url" aria-label="url"
+                placeholder="ссылка RSS">
             </div>
+            <div class="col-auto"><button id="form-btn" class="btn btn-success btn-m" type="submit"
+                aria-label="add">Add</button>
+            </div>
+          </div>
+        </form>
+        <div class="example text-secondary">
+          Пример : http://lorem-rss.herokuapp.com/feed
         </div>
-    </main>
+        <div id="rss-description">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-fluid p-5">
+    <div class="row">
+      <div id="feeds" class="col-8 mx-auto">
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="posts" class="col-8 mx-auto">
+      </div>
+    </div>
+  </main>
 </body>
