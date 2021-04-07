@@ -1,27 +1,21 @@
 const onChange = require('on-change');
-const {
-  renderForm, renderFeed, renderError, renderPosts,
-} = require('./renderer');
+const { renderer } = require('./renderers/renderers');
 
 exports.view = (state) => {
   const watcher = onChange(state, (path, value) => {
-    if (path === 'error') {
-      renderError(value);
+    const renderType = path.split('.')[0];
+    if (value === 'render') {
+      renderer[renderType](state);
     }
 
-    if (path === 'form.state' && value === 'render') {
-      renderForm(state.form);
+    if (renderType === 'form' && value === 'loading') {
+      const formButton = document.querySelector('#rss-form #form-btn');
+      formButton.disabled = true;
     }
 
-    if (path === 'feed.state') {
-      if (value === 'renderFeed') {
-        renderFeed(state.feed);
-      }
-      if (value === 'renderPosts') {
-        renderPosts(state.feed);
-      }
+    if (value === 'rendered') {
+      state[renderType].state = 'waiting';
     }
   });
-
   return watcher;
 };
