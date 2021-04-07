@@ -1,71 +1,83 @@
 const { validate } = require('./validator');
-const { parser } = require('./parser');
+const { parseNewFeeds } = require('./parsers/parseNewFeeds');
+const { parseNewPosts } = require('./parsers/parseNewPosts');
 const { view } = require('./view');
 
-const makeFeedActive = () => {
-  const feedsList = document.querySelectorAll('#feeds li');
-  const postsList = document.querySelectorAll('#posts  ul');
+const updatePosts = {
+  id: 0,
+  timer(watcher) {
+    clearTimeout(this.id);
 
-  feedsList.forEach((feedsListItem) => {
-    feedsListItem.addEventListener('click', (e) => {
-      const { currentTarget } = e;
-      const { feedId } = currentTarget.dataset;
+    const { feedsItems } = watcher.feeds;
+    const urls = feedsItems.map((item) => item.url);
 
-      postsList.forEach((item) => (item.dataset.feedId === feedId ? item.classList.remove('d-none') : item.classList.add('d-none')));
-
-      feedsList.forEach((item) => item.classList.remove('bg-info'));
-      currentTarget.classList.add('bg-info');
+    parseNewPosts(urls, watcher).then((result) => {
+      watcher.posts.postsItems = result;
+      watcher.posts.state = 'render';
     });
-  });
+
+    // make feeds inactive
+    const feedsListItems = document.querySelectorAll('#feeds > ul >  li');
+    [...feedsListItems].forEach((feed) => feed.classList.remove('bg-info'));
+
+    this.id = setTimeout(() => this.timer(watcher), 5000);
+  },
 };
 
 exports.app = () => {
   const state = {
     form: {
       state: 'waiting',
-      descriptionColor: '',
       validationDescription: '',
     },
 
-    feed: {
-      feedLinks: new Set(),
+    feeds: {
       state: 'waiting',
-      feeds: [],
-      posts: [],
+      feedsItems: [],
     },
-    error: '',
+
+    posts: {
+      state: 'waiting',
+      postsItems: [],
+    },
+    error: {
+      state: 'waiting',
+      description: '',
+    },
   };
 
   const watcher = view(state);
-  const form = document.querySelector('#rss-form');
 
+  const form = document.querySelector('#rss-form');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const formData = new FormData(form);
-    const url = formData.get('url');
+    const url = formData.get('url').trim();
 
-    validate(url, state)
+    validate(url, watcher)
       .then((valid) => {
-        // render form by valid type.
-        state.form.descriptionColor = valid ? 'text-success' : 'text-danger';
-        watcher.form.state = 'render';
+        // block button
+        watcher.form.state = 'loading';
 
         // parse and render feeds if url was valid
-        if (!valid) return false;
+        if (!valid) {
+          watcher.form.state = 'render';
+          return false;
+        }
 
-        const { feed } = state;
-        return parser(url, feed);
+        return parseNewFeeds(url, watcher).then(() => {
+          watcher.form.state = 'render';
+          watcher.feeds.state = 'render';
+          watcher.posts.state = 'render';
+        });
       })
       .then(() => {
-        watcher.feed.state = 'renderFeed';
-        watcher.feed.state = 'renderPosts';
-
-        // show needed posts on click
-        makeFeedActive();
+        // update post every 5 seconds
+        updatePosts.timer(watcher);
       })
       .catch((error) => {
-        watcher.error = error;
+        watcher.error.description = error;
+        watcher.error.state = 'render';
       });
   });
 };
