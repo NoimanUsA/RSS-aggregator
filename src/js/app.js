@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 const { validate } = require('./validator');
 const { parseNewFeeds } = require('./parsers/parseNewFeeds');
 const { parseNewPosts } = require('./parsers/parseNewPosts');
