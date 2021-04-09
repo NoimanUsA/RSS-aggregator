@@ -3,7 +3,6 @@ import ru from '../../locales/ru';
 import renderForm from './form';
 import renderFeeds from './feeds';
 import renderPosts from './posts';
-import renderErrors from './errors';
 
 i18n.init({
   lng: 'ru',
@@ -25,9 +24,4 @@ export default {
   posts(state) {
     return renderPosts(state, i18n);
   },
-
-  error(state) {
-    return renderErrors(state);
-  },
-
 };

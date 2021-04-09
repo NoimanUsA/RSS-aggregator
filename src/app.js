@@ -90,8 +90,7 @@ export default () => {
         updatePosts.timer(watcher, state);
       })
       .catch((error) => {
-        watcher.error.description = error;
-        watcher.error.state = 'render';
+        console.log(error);
       });
   });
 };
