@@ -1,4 +1,4 @@
-exports.renderErrors = (state) => {
+export default (state) => {
   const { error } = state;
   const errorContainer = document.querySelector('#alert');
   errorContainer.innerHTML = error.description;

@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const hasPost = (currentPosts, link) => (!!currentPosts.find((post) => post.link === link));
 
@@ -28,7 +28,7 @@ const updatePosts = (postsItems, feedId, items) => {
   return newPosts;
 };
 
-exports.parseNewPosts = (urls, state) => {
+export default (urls, state) => {
   const { feedsItems } = state.feeds;
   const { postsItems } = state.posts;
 

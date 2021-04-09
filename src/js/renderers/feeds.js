@@ -39,7 +39,7 @@ const showFeedsItemPosts = (feedsList) => {
     });
 };
 
-exports.renderFeeds = (state, i18n) => {
+export default (state, i18n) => {
   const { feeds } = state;
   const { feedsItems } = feeds;
   const feedsContainer = document.querySelector('#feeds');

@@ -1,4 +1,4 @@
-exports.renderForm = (state, i18n) => {
+export default (state, i18n) => {
   const { form } = state;
   const color = form.validationDescription === 'added' ? 'text-success' : 'text-danger';
   const descContainer = document.querySelector('#rss-description');

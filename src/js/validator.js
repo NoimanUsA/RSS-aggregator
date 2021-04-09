@@ -47,4 +47,4 @@ const isURL = (url, state) => {
   });
 };
 
-exports.validate = (url, state) => isURL(url, state);
+export default (url, state) => isURL(url, state);

@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-const { validate } = require('./validator');
-const { parseNewFeeds } = require('./parsers/parseNewFeeds');
-const { parseNewPosts } = require('./parsers/parseNewPosts');
-const { view } = require('./view');
+import validate from './validator';
+import parseNewFeeds from './parsers/parseNewFeeds';
+import parseNewPosts from './parsers/parseNewPosts';
+import view from './view';
 
 const updatePosts = {
   id: 0,
@@ -35,7 +34,7 @@ const updatePosts = {
   },
 };
 
-exports.app = () => {
+export default () => {
   const state = {
     form: {
       state: 'waiting',

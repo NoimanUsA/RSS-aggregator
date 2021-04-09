@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const createFeed = (id, channel, url) => ({
   feedId: id,
@@ -22,7 +22,7 @@ const createPosts = (state, feedId, items) => {
   });
 };
 
-exports.parseNewFeeds = (url, state) => {
+export default (url, state) => {
   const { feedsItems } = state.feeds;
   const { postsItems } = state.posts;
   return axios.get(`https://api.allorigins.win/raw?url=${url}&timestamp=${new Date().getTime()}`)

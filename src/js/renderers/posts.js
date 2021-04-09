@@ -52,7 +52,7 @@ const createPostsItem = (postsItem, i18n) => {
   return postListItem;
 };
 
-exports.renderPosts = (state, i18n) => {
+export default (state, i18n) => {
   const { posts } = state;
   const { postsItems } = posts;
 

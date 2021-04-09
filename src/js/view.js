@@ -1,7 +1,7 @@
-const onChange = require('on-change');
-const { renderer } = require('./renderers/renderers');
+import onChange from 'on-change';
+import renderer from './renderers/renderers';
 
-exports.view = (state) => {
+export default (state) => {
   const watcher = onChange(state, (path, value) => {
     const renderType = path.split('.')[0];
     if (value === 'render') {

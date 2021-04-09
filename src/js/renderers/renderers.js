@@ -1,9 +1,9 @@
-const i18n = require('i18next');
-const { ru } = require('../../../locales/ru');
-const { renderForm } = require('./form');
-const { renderFeeds } = require('./feeds');
-const { renderPosts } = require('./posts');
-const { renderErrors } = require('./errors');
+import i18n from 'i18next';
+import { ru } from '../../../locales/ru';
+import renderForm from './form';
+import renderFeeds from './feeds';
+import renderPosts from './posts';
+import renderErrors from './errors';
 
 i18n.init({
   lng: 'ru',
@@ -13,7 +13,7 @@ i18n.init({
   },
 });
 
-exports.renderer = {
+export default {
   form(state) {
     return renderForm(state, i18n);
   },
