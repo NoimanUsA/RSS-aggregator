@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "3th project",
-  "main": "src/js/index.js",
+  "main": "src/app.js",
   "scripts": {
     "lint": "npx eslint .",
     "build": "npx webpack",
