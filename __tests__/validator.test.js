@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import validate from '../src/js/validator';
+import validate from '../src/validator';
 
 axios.defaults.adapter = require('axios/lib/adapters/http');
 

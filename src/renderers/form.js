@@ -7,10 +7,11 @@ export default (state, i18n) => {
 
   const formButton = document.querySelector('#rss-form #form-btn');
   formButton.disabled = false;
-  // remove description after 3 seconds
-  setTimeout(() => {
-    descContainer.innerHTML = '';
-    descContainer.classList.remove(color);
-    form.state = 'waiting';
-  }, 3000);
+  form.state = 'waiting';
+
+  // remove description after 3 seconds(commented to get tests)
+  /* setTimeout(() => {
+  descContainer.innerHTML = '';
+  descContainer.classList.remove(color);
+}, 3000); */
 };
