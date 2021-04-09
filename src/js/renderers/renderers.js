@@ -1,4 +1,4 @@
-const i18n = require('i18next').default;
+const i18n = require('i18next');
 const { ru } = require('../../../locales/ru');
 const { renderForm } = require('./form');
 const { renderFeeds } = require('./feeds');
