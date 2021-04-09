@@ -1,4 +1,4 @@
-exports.ru = {
+export default {
   translation: {
     form: {
       added: 'RSS успешно загружен',

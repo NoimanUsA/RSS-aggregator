@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import { ru } from '../../../locales/ru';
+import ru from '../../../locales/ru';
 import renderForm from './form';
 import renderFeeds from './feeds';
 import renderPosts from './posts';

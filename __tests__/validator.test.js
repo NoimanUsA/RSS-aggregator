@@ -1,7 +1,8 @@
-const axios = require('axios');
-axios.defaults.adapter = require('axios/lib/adapters/http');
+import axios from 'axios';
 
-const { validate } = require('../src/js/validator');
+import validate from '../src/js/validator';
+
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 const urls = [
   ['lorem-rss.herokuapp.com', false, 'isntUrl'],
