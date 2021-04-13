@@ -7,11 +7,10 @@ const createPostsItem = (postsItem, i18n) => {
   // create reference
   const postRef = document.createElement('a');
   if (!postsItem.visited) {
-    postRef.classList.add('fw-bold');
+    postRef.classList.add('font-weight-bold');
   } else {
-    postRef.classList.add('fw-normal');
+    postRef.classList.add('font-weight-normal');
   }
-  postRef.classList.add('text-decoration-none');
   postRef.target = '_blank';
   postRef.textContent = postsItem.title;
   postRef.href = postsItem.link;
@@ -29,8 +28,8 @@ const createPostsItem = (postsItem, i18n) => {
   // add events
   // delete font-weight on click
   postRef.addEventListener('click', (e) => {
-    e.currentTarget.classList.remove('fw-bold');
-    e.currentTarget.classList.add('fw-normal');
+    e.currentTarget.classList.remove('font-weight-bold');
+    e.currentTarget.classList.add('font-weight-normal');
     postsItem.visited = true;
   });
 
