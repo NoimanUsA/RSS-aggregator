@@ -12,6 +12,7 @@ export default (state, i18n) => {
       const formButton = document.querySelector('#form-btn');
       const formLine = document.querySelector('#form-line');
       if (value === 'load') {
+        formLine.value = '';
         formButton.disabled = true;
         formLine.setAttribute('readonly', true);
       }
