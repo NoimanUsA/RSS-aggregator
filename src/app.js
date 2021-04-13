@@ -68,6 +68,7 @@ export default () => {
     const input = form.querySelector('.form-control');
     const url = input.value;
     input.value = '';
+    watcher.form.state = 'load';
 
     parseNewFeeds(url, state).then((response) => {
       watcher.form.state = 'render';
