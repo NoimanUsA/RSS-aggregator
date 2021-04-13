@@ -20,8 +20,8 @@ const createPostsItem = (postsItem, i18n) => {
   const postButton = document.createElement('button');
   postButton.classList.add('btn', 'btn-success');
   postButton.textContent = i18n.t('feed.postButton');
-  postButton.dataset.bsToggle = 'modal';
-  postButton.dataset.bsTarget = '#modal';
+  postButton.dataset.toggle = 'modal';
+  postButton.dataset.target = '#modal';
 
   postListItem.append(postRef, postButton);
 
@@ -37,6 +37,7 @@ const createPostsItem = (postsItem, i18n) => {
   postButton.addEventListener('click', () => {
     postRef.classList.remove('font-weight-bold');
     postRef.classList.add('font-weight-normal');
+
     const modalDialog = document.querySelector('.modal-dialog');
     const modalHeader = modalDialog.querySelector('.modal-header > h5');
     const modalBody = modalDialog.querySelector('.modal-body > p');
