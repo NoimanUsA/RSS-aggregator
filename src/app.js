@@ -4,7 +4,7 @@ import parseNewPosts from './parsers/parseNewPosts';
 import view from './view';
 import ru from '../locales/ru';
 
-const updatePosts = {
+/* const updatePosts = {
   id: 0,
   timer(watcher) {
     const { feedsItems } = watcher.feeds;
@@ -31,7 +31,7 @@ const updatePosts = {
     clearTimeout(this.id);
     this.id = setTimeout(() => this.timer(watcher), 5000);
   },
-};
+}; */
 
 export default () => {
   const state = {
