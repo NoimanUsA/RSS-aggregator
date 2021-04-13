@@ -13,6 +13,7 @@ export default (state, i18n) => {
       const formLine = document.querySelector('#form-line');
       if (value === 'load') {
         formButton.disabled = true;
+        formLine.innerHTML = '';
         formLine.readOnly = true;
       }
       if (value === 'render') {
