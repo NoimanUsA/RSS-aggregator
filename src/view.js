@@ -10,12 +10,15 @@ export default (state, i18n) => {
 
     if (renderType === 'form') {
       const formButton = document.querySelector('#form-btn');
+      const formLine = document.querySelector('#form-line');
       if (value === 'load') {
         formButton.disabled = true;
+        formLine.readOnly = true;
       }
       if (value === 'render') {
         renderer.form(state, i18n);
         formButton.disabled = false;
+        formLine.readOnly = false;
       }
     }
   });
