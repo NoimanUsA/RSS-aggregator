@@ -9,5 +9,5 @@ const route = (url) => {
 
 const parser = new DOMParser();
 
-export default (url) => axios.get(route(url)).then((response) => response.data)
+export default (url) => axios.get(route(url)).then((response) => response.data.contents)
   .then((data) => parser.parseFromString(data, 'text/xml'));
