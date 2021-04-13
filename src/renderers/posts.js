@@ -35,6 +35,8 @@ const createPostsItem = (postsItem, i18n) => {
 
   // change modal on click to  post button
   postButton.addEventListener('click', () => {
+    postRef.classList.remove('font-weight-bold');
+    postRef.classList.add('font-weight-normal');
     const modalDialog = document.querySelector('.modal-dialog');
     const modalHeader = modalDialog.querySelector('.modal-header > h5');
     const modalBody = modalDialog.querySelector('.modal-body > p');
