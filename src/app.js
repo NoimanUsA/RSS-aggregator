@@ -84,8 +84,7 @@ export default () => {
       .then(() => {
         updatePosts.timer(watcher);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         state.form.validationDescription = 'netError';
         watcher.form.state = 'render';
       });
