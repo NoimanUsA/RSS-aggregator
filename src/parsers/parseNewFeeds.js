@@ -1,4 +1,4 @@
-import axios from 'axios';
+import validate from '../validator';
 
 const createFeed = (id, channel, url) => ({
   feedId: id,
@@ -25,15 +25,10 @@ const createPosts = (state, feedId, items) => {
 export default (url, state) => {
   const { feedsItems } = state.feeds;
   const { postsItems } = state.posts;
-  return axios.get(`https://api.allorigins.win/raw?url=${url}&timestamp=${new Date().getTime()}`)
-    .then((res) => {
-      if (res.status >= 300) {
-        return Promise.reject(new Error(`Network error ${res.status}`));
-      }
-      return res.data;
-    })
-    .then((xml) => new DOMParser().parseFromString(xml, 'text/xml'))
+  return validate(url, state)
     .then((data) => {
+      if (!data) { return false; }
+
       const channel = data.querySelector('channel');
       const items = data.querySelectorAll('item');
 
@@ -43,5 +38,7 @@ export default (url, state) => {
 
       const posts = createPosts(state, newFeedId, items);
       state.posts.postsItems = [...posts, ...postsItems];
+
+      return true;
     });
 };

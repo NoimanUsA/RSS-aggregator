@@ -1,33 +1,34 @@
-import validate from './validator';
+import i18n from 'i18next';
 import parseNewFeeds from './parsers/parseNewFeeds';
 import parseNewPosts from './parsers/parseNewPosts';
 import view from './view';
+import ru from '../locales/ru';
 
 const updatePosts = {
   id: 0,
   timer(watcher) {
-    clearTimeout(this.id);
-
     const { feedsItems } = watcher.feeds;
+    const { postsItems } = watcher.posts;
     const urls = feedsItems.map((item) => item.url);
 
     parseNewPosts(urls, watcher)
       .then((result) => {
+        if (result.length === postsItems.length) {
+          return false;
+        }
         watcher.posts.postsItems = result;
         watcher.posts.state = 'render';
+        return true;
       })
       .then(() => {
         watcher.posts.state = 'waiting';
-      })
-      .catch((error) => {
-        watcher.error.description = error;
-        watcher.error.state = 'render';
       });
 
     // make feeds inactive
     const feedsListItems = document.querySelectorAll('#feeds > ul >  li');
     [...feedsListItems].forEach((feed) => feed.classList.remove('bg-info'));
 
+    clearTimeout(this.id);
     this.id = setTimeout(() => this.timer(watcher), 5000);
   },
 };
@@ -35,26 +36,31 @@ const updatePosts = {
 export default () => {
   const state = {
     form: {
-      state: 'waiting',
+      state: 'loading',
+      isValid: false,
       validationDescription: '',
     },
 
     feeds: {
-      state: 'waiting',
+      state: '',
       feedsItems: [],
     },
 
     posts: {
-      state: 'waiting',
+      state: '',
       postsItems: [],
-    },
-    error: {
-      state: 'waiting',
-      description: '',
     },
   };
 
-  const watcher = view(state);
+  i18n.init({
+    lng: 'ru',
+    debug: true,
+    resources: {
+      ru,
+    },
+  });
+
+  const watcher = view(state, i18n);
 
   const form = document.querySelector('#rss-form');
   form.addEventListener('submit', (e) => {
@@ -63,34 +69,24 @@ export default () => {
     const url = input.value;
     input.value = '';
 
-    validate(url, state).then((valid) => {
-      // block button
-      watcher.form.state = 'loading';
+    watcher.form.state = 'load';
 
-      // parse and render feeds if url was valid
-      if (!valid) {
-        watcher.form.state = 'render';
+    parseNewFeeds(url, state).then((response) => {
+      watcher.form.state = 'render';
+      if (!response) {
         return false;
       }
 
-      return parseNewFeeds(url, state);
+      watcher.feeds.state = 'render';
+      watcher.posts.state = 'render';
+      return true;
     })
       .then(() => {
+        updatePosts.timer(watcher);
+      })
+      .catch(() => {
+        state.form.validationDescription = 'netError';
         watcher.form.state = 'render';
-        watcher.feeds.state = 'render';
-        watcher.posts.state = 'render';
-      })
-      .then(() => {
-        watcher.form.state = 'waiting';
-        watcher.feeds.state = 'waiting';
-        watcher.posts.state = 'waiting';
-      })
-      .then(() => {
-        // update post every 5 seconds
-        updatePosts.timer(watcher, state);
-      })
-      .catch((error) => {
-        console.log(error);
       });
   });
 };

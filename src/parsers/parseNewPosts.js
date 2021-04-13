@@ -1,4 +1,4 @@
-import axios from 'axios';
+import loadData from '../loadData';
 
 const hasPost = (currentPosts, link) => (!!currentPosts.find((post) => post.link === link));
 
@@ -33,14 +33,7 @@ export default (urls, state) => {
   const { postsItems } = state.posts;
 
   const newPosts = urls.reduce((acc, url) => {
-    const newAcc = acc.then((accumulator) => axios.get(`https://api.allorigins.win/raw?url=${url}&timestamp=${new Date().getTime()}`)
-      .then((res) => {
-        if (res.status >= 300) {
-          return Promise.reject(new Error(`Network error ${res.status} during posts update`));
-        }
-        return res.data;
-      })
-      .then((xml) => new DOMParser().parseFromString(xml, 'text/xml'))
+    const newAcc = acc.then((accumulator) => loadData(url)
       .then((data) => {
         const items = data.querySelectorAll('item');
 

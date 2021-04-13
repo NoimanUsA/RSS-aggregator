@@ -15,7 +15,7 @@ const createFeedsItem = (feedItem) => {
   return feedsListItem;
 };
 
-const showFeedsItemPosts = (feedsList) => {
+const showFeedPosts = (feedsList) => {
   const { target, currentTarget } = feedsList;
   const feedsListItems = currentTarget.querySelectorAll('li');
 
@@ -60,6 +60,8 @@ export default (state, i18n) => {
   });
 
   // add events
-  feedsList.removeEventListener('click', showFeedsItemPosts);
-  feedsList.addEventListener('click', showFeedsItemPosts);
+  feedsList.removeEventListener('click', showFeedPosts);
+  feedsList.addEventListener('click', showFeedPosts);
+
+  feeds.state = 'waiting';
 };

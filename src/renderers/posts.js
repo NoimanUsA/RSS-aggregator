@@ -78,4 +78,6 @@ export default (state, i18n) => {
     const postsListItem = createPostsItem(postsItem, i18n);
     mainPostsList.append(postsListItem);
   });
+
+  posts.state = 'waiting';
 };

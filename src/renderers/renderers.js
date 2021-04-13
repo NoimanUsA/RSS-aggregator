@@ -1,27 +1,17 @@
-import i18n from 'i18next';
-import ru from '../../locales/ru';
 import renderForm from './form';
 import renderFeeds from './feeds';
 import renderPosts from './posts';
 
-i18n.init({
-  lng: 'ru',
-  debug: true,
-  resources: {
-    ru,
-  },
-});
-
 export default {
-  form(state) {
+  form(state, i18n) {
     return renderForm(state, i18n);
   },
 
-  feeds(state) {
+  feeds(state, i18n) {
     return renderFeeds(state, i18n);
   },
 
-  posts(state) {
+  posts(state, i18n) {
     return renderPosts(state, i18n);
   },
 };

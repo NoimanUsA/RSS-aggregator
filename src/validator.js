@@ -1,39 +1,33 @@
-const axios = require('axios');
-const yup = require('yup');
+import * as yup from 'yup';
+import loadData from './loadData';
 
 const schema = yup.string().url();
 
-const isExist = (url, state) => {
-  const { feeds } = state;
-  const { form } = state;
-  if (feeds.feedsItems.find((item) => item.url === url)) {
-    form.validationDescription = 'has';
-    return false;
-  }
-
-  form.validationDescription = 'added';
-  return true;
-};
-
 const isRSS = (url, state) => {
   const { form } = state;
-  return axios.get(`https://hexlet-allorigins.herokuapp.com/raw?url=${url}`)
-    .then((res) => {
-      if (res.status >= 300) {
-        return Promise.reject(new Error(`Network error ${res.status}`));
-      }
-      return res.data;
-    })
-    .then((xml) => new DOMParser().parseFromString(xml, 'text/xml')
-      .querySelector('rss'))
-    .then((p) => {
-      if (!p) {
+  return loadData(url)
+    .then((data) => {
+      const type = data.querySelector('rss');
+      if (!type) {
         form.validationDescription = 'isntRss';
         return false;
       }
 
-      return isExist(url, state);
+      form.validationDescription = 'added';
+      return data;
     });
+};
+
+const isExist = (url, state) => {
+  const { feeds } = state;
+  const { form } = state;
+  const currentUrlFeed = feeds.feedsItems.find((item) => item.url === url);
+  if (currentUrlFeed) {
+    form.validationDescription = 'has';
+    return false;
+  }
+
+  return isRSS(url, state);
 };
 
 const isURL = (url, state) => {
@@ -43,7 +37,7 @@ const isURL = (url, state) => {
       form.validationDescription = 'isntUrl';
       return false;
     }
-    return isRSS(url, state);
+    return isExist(url, state);
   });
 };
 
