@@ -6,7 +6,6 @@ export default {
       isntRss: 'Ресурс не содержит валидный RSS',
       istnUrl: 'Ссылка должна быть валидным URL',
       netError: 'Ошибка сети',
-      updateError: 'Ошибка при обновлении постов',
     },
     feed: {
       feedHead: 'Фиды',

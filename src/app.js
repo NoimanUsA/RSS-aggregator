@@ -69,8 +69,6 @@ export default () => {
     const url = input.value;
     input.value = '';
 
-    watcher.form.state = 'load';
-
     parseNewFeeds(url, state).then((response) => {
       watcher.form.state = 'render';
       if (!response) {
