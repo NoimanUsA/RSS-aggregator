@@ -12,3 +12,8 @@ run:
 
 test:
 	npx jest test
+
+stupid: 
+	git add *
+	git commit -m 'form'
+	git push

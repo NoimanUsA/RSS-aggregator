@@ -13,14 +13,14 @@ const createPostsItem = (postsItem, i18n) => {
   }
   postRef.classList.add('text-decoration-none');
   postRef.target = '_blank';
-  postRef.innerText = postsItem.title;
+  postRef.textContent = postsItem.title;
   postRef.href = postsItem.link;
   postRef.dataset.postId = postsItem.postId;
 
   // create post button
   const postButton = document.createElement('button');
   postButton.classList.add('btn', 'btn-success');
-  postButton.innerText = i18n.t('feed.postButton');
+  postButton.textContent = i18n.t('feed.postButton');
   postButton.dataset.bsToggle = 'modal';
   postButton.dataset.bsTarget = '#modal';
 
@@ -42,11 +42,11 @@ const createPostsItem = (postsItem, i18n) => {
     const btnReadMore = modalDialog.querySelector('.btn-read-more');
     const btnCloseModal = modalDialog.querySelector('.btn-close-modal');
 
-    modalHeader.innerText = postsItem.title;
-    modalBody.innerText = postsItem.description;
-    btnReadMore.innerText = i18n.t('modal.readMore');
+    modalHeader.textContent = postsItem.title;
+    modalBody.textContent = postsItem.description;
+    btnReadMore.textContent = i18n.t('modal.readMore');
     btnReadMore.href = postsItem.link;
-    btnCloseModal.innerText = i18n.t('modal.closeModal');
+    btnCloseModal.textContent = i18n.t('modal.closeModal');
   });
 
   return postListItem;

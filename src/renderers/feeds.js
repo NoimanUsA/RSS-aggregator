@@ -43,10 +43,10 @@ export default (state, i18n) => {
   const { feeds } = state;
   const { feedsItems } = feeds;
   const feedsContainer = document.querySelector('#feeds');
-  feedsContainer.innerHTML = '';
+  feedsContainer.textContent = '';
 
   const feedsHeader = document.createElement('h2');
-  feedsHeader.innerText = i18n.t('feed.feedHead');
+  feedsHeader.textContent = i18n.t('feed.feedHead');
 
   const feedsList = document.createElement('ul');
   feedsList.classList.add('list-group', 'mb-5');
