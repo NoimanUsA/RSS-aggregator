@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "module",
-    "url": "git+https://github.com/NoimanUsA/frontend-project-lvl3.git"
+    "url": "git+https://github.com/NoimanUsA/RSS-aggregator"
   },
   "author": "Noiman",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NoimanUsA/frontend-project-lvl3/issues"
+    "url": "https://github.com/NoimanUsA/RSS-aggregator"
   },
-  "homepage": "https://github.com/NoimanUsA/frontend-project-lvl3#readme",
+  "homepage": "https://github.com/NoimanUsA/RSS-aggregator",
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
