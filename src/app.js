@@ -66,7 +66,7 @@ export default () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const input = form.querySelector('.form-control');
-    const url = input.value;
+    const url = input.value.trim();
     input.readOnly = true;
     watcher.form.state = 'load';
 
@@ -80,9 +80,9 @@ export default () => {
       watcher.posts.state = 'render';
       return true;
     })
-      /* .then(() => {
+      .then(() => {
         updatePosts.timer(watcher);
-      }) */
+      })
       .catch((error) => {
         console.log(error, state);
         state.form.validationDescription = 'netError';
