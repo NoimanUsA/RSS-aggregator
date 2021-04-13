@@ -4,7 +4,7 @@ export default {
       added: 'RSS успешно загружен',
       has: 'RSS уже существует',
       isntRss: 'Ресурс не содержит валидный RSS',
-      istnUrl: 'Ссылка должна быть валидным URL',
+      isntUrl: 'Ссылка должна быть валидным URL',
       netError: 'Ошибка сети',
     },
     feed: {
