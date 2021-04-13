@@ -5,10 +5,10 @@ const createFeedsItem = (feedItem) => {
   feedsListItem.style = 'cursor:pointer';
 
   const feedHeader = document.createElement('h3');
-  feedHeader.innerText = feedItem.title;
+  feedHeader.textContent = feedItem.title;
 
   const feedDescription = document.createElement('p');
-  feedDescription.innerText = feedItem.description;
+  feedDescription.textContent = feedItem.description;
 
   feedsListItem.append(feedHeader, feedDescription);
 
