@@ -19,6 +19,7 @@ export default (state, i18n) => {
         renderer.form(state, i18n);
         formButton.disabled = false;
         formLine.readOnly = false;
+        formLine.innerHTML = '';
       }
     }
   });
