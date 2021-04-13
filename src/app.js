@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import i18next from 'i18next';
 import parseNewFeeds from './parsers/parseNewFeeds';
 import parseNewPosts from './parsers/parseNewPosts';
 import view from './view';
@@ -37,7 +37,6 @@ export default () => {
   const state = {
     form: {
       state: 'loading',
-      isValid: false,
       validationDescription: '',
     },
 
@@ -52,6 +51,7 @@ export default () => {
     },
   };
 
+  const i18n = i18next.createInstance();
   i18n.init({
     lng: 'ru',
     debug: true,

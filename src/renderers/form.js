@@ -6,4 +6,5 @@ export default (state, i18n) => {
   descContainer.classList.add(color);
 
   form.state = 'waiting';
+  descContainer.classList.add(color);
 };
