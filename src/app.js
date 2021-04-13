@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import parseNewFeeds from './parsers/parseNewFeeds';
-import parseNewPosts from './parsers/parseNewPosts';
+/* import parseNewPosts from './parsers/parseNewPosts'; */
 import view from './view';
 import ru from '../locales/ru';
 
