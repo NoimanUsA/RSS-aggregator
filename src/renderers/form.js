@@ -5,7 +5,7 @@ export default (state, i18n) => {
   descContainer.classList.remove('text-success', 'text-danger');
 
   descContainer.classList.add(color);
-  descContainer.innerText = i18n.t(`form.${form.validationDescription}`);
+  descContainer.innerHTML = i18n.t(`form.${form.validationDescription}`);
 
   form.state = 'waiting';
 };
