@@ -4,6 +4,7 @@
 
 
 RSS Aggregator is a service to read and aggregate RSS feeds ([Wikipedia](https://en.wikipedia.org/wiki/RSS)).
+
 Feed's posts are updated every 10 seconds. Also, you can choose which feed's posts you want to show on click to feed.
 
 [Link on Vercel](https://rss-aggregator-lime.vercel.app)
